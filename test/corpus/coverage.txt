@@ -1,0 +1,187 @@
+==================
+Visible named content and comments
+==================
+
+// source line comment
+asterix 000 "Coverage Nodes"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "String Content"
+        element 8
+            string ascii
+    002 "BDS Content"
+        element 8
+            bds A1
+    003 "Constrained Integer"
+        element 16
+            unsigned integer >= 0 < 256
+
+uap
+    001
+    002
+    003
+/* source block comment */
+
+---
+
+(source_file (line_comment) (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (element (bit_size) (content_string (string_type)))) (item (item_name) (string) (element (bit_size) (content_bds (bds_address)))) (item (item_name) (string) (element (bit_size) (content_integer (signedness) (constraint (comparison_operator) (number)) (constraint (comparison_operator) (number)))))) (uap_block (uap_item (item_name)) (uap_item (item_name)) (uap_item (item_name)))) (block_comment))
+
+==================
+CRLF source and EOF final line
+==================
+
+asterix 000 "CRLF Coverage"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "Raw"
+        element 8
+            raw
+
+uap
+    001
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (element (bit_size) (content_raw)))) (uap_block (uap_item (item_name)))))
+
+==================
+Blank and comment-only lines
+==================
+
+asterix 000 "Comment Lines"
+edition 1.0
+date 2000-01-01
+
+items
+
+    // comment-only line
+
+    /* block-only line */
+
+    001 "Raw"
+        element 8
+            raw
+
+uap
+    001
+
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (line_comment) (block_comment) (item (item_name) (string) (element (bit_size) (content_raw)))) (uap_block (uap_item (item_name)))))
+
+==================
+Tab indentation uses four columns
+==================
+
+asterix 000 "Tab Indentation"
+edition 1.0
+date 2000-01-01
+
+items
+	001 "Tab Item"
+		element 8
+			raw
+
+uap
+	001
+
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (element (bit_size) (content_raw)))) (uap_block (uap_item (item_name)))))
+
+==================
+Mixed indentation with equal computed width
+==================
+
+asterix 000 "Mixed Indentation"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "Spaces"
+        element 8
+            raw
+	002 "Mixed"
+	    element 8
+		    raw
+
+uap
+    001
+	002
+
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (element (bit_size) (content_raw))) (item (item_name) (string) (element (bit_size) (content_raw)))) (uap_block (uap_item (item_name)) (uap_item (item_name)))))
+
+==================
+Deep multi-dedent returns to item level
+==================
+
+asterix 000 "Deep Dedent"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "Deep"
+        group
+            A "A"
+                group
+                    B "B"
+                        group
+                            C "C"
+                                element 8
+                                    raw
+    002 "After"
+        element 8
+            raw
+
+uap
+    001
+    002
+
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (group (item (item_name) (string) (group (item (item_name) (string) (group (item (item_name) (string) (element (bit_size) (content_raw))))))))) (item (item_name) (string) (element (bit_size) (content_raw)))) (uap_block (uap_item (item_name)) (uap_item (item_name)))))
+
+==================
+Inconsistent dedent recovery
+==================
+
+asterix 000 "Bad Dedent"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "First"
+        element 8
+            raw
+  002 "Misaligned"
+      element 8
+          raw
+
+uap
+    001
+    002
+
+---
+
+(source_file (basic_category (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (items_block (item (item_name) (string) (element (bit_size) (content_raw)))) (ERROR) (ERROR (identifier)) (ERROR (identifier)) (uap_block (uap_item (item_name)) (uap_item (item_name)))))
+
+==================
+Partial input recovery
+==================
+
+asterix 000 "Partial"
+edition 1.0
+date 2000-01-01
+
+items
+    001 "Incomplete"
+        element 8
+
+---
+
+(ERROR (category_header (category_number) (string)) (edition (version)) (date (date_literal)) (item_name) (string) (bit_size))

@@ -1,0 +1,30 @@
+{
+  "name": "tree-sitter-asterix",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for ASTERIX .ast specification files.",
+  "type": "commonjs",
+  "private": true,
+  "author": {
+    "name": "Alen Požegić"
+  },
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "asterix",
+    "parser",
+    "tree-sitter"
+  ],
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "build:neovim:bundle": "./packaging/neovim/make-bundle.sh"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "0.26.9"
+  },
+  "allowScripts": {
+    "tree-sitter-cli@0.26.9": true
+  }
+}

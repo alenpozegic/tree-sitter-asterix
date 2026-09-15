@@ -1,0 +1,23 @@
+{
+  "grammars": [
+    {
+      "name": "asterix",
+      "camelcase": "Asterix",
+      "title": "ASTERIX",
+      "scope": "source.asterix",
+      "path": ".",
+      "file-types": [
+        "ast"
+      ],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "tags": "queries/tags.scm",
+      "injection-regex": "^asterix$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "BSD-3-Clause",
+    "description": "Tree-sitter grammar for ASTERIX .ast specification files."
+  }
+}

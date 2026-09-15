@@ -1,0 +1,1390 @@
+==================
+Basic category skeleton
+==================
+
+asterix 021 "ADS-B Target Reports"
+edition 2.7
+date 2025-07-02
+
+items
+
+    010 "Data Source Identification"
+        element 8
+            raw
+
+uap
+    010
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (element
+          (bit_size)
+          (content_raw))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Reference compound root
+==================
+
+ref 021 "ADS-B Target Reports Expansion"
+edition 1.4
+date 2018-03-08
+
+compound 1
+    BPS "Barometric Pressure Setting"
+        definition
+            Barometric Pressure Setting
+        group
+            spare 4
+            BPS "Barometric Pressure Setting"
+                element 12
+                    raw
+
+---
+
+(source_file
+  (ref_spec
+    (ref_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (compound
+      (byte_size)
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (group
+          (spare
+            (bit_size))
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_raw))))))))
+
+==================
+Documentation value list dedent continuation
+==================
+
+asterix 018 "Mode S Datalink Function Messages"
+edition 1.7
+date 2015-11-08
+
+items
+
+    018 "Mode S Packet Header"
+        remark
+            Note:
+                - The PR field is used to describe the priority as follows:
+
+                      0 = low
+                      1 = high
+
+                  For ROUTE and MSP packets the value of PR has no significance.
+                  For standardisation, PR is set to known values.
+
+uap
+    018
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (doc_value_row
+            (doc_value_row_text))
+          (doc_value_row
+            (doc_value_row_text))
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation general literal table continuation
+==================
+
+asterix 021 "ADS-B Target Reports"
+edition 2.7
+date 2025-07-02
+
+items
+
+    200 "Target Status"
+        remark
+            Mapping shall be done according to the following table: ::
+
+                ADS-B Version 3 (PS3)           ADS-Version < 3 (I021/200 - PS)
+                6 (Aircraft in distress -       1 (General emergency)
+                  automatic activation)
+                7 (Aircraft in distress -       1 (General emergency)
+                  manual activation)
+
+uap
+    200
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation literal table dedent to prose
+==================
+
+asterix 025 "CNS/ATM Ground System Status Reports"
+edition 1.5
+date 2021-07-01
+
+items
+
+    015 "Service Identification"
+        remark
+            The character table is defined below: ::
+
+                b4  b3  b2  b1
+                1   1   1   1       O
+
+            SP 1 = SPACE code
+            For each character the bit numbering convention shall be observed.
+
+uap
+    015
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation literal table dedent to sentence prose
+==================
+
+asterix 025 "CNS/ATM Ground System Status Reports"
+edition 1.5
+date 2021-07-01
+
+items
+
+    020 "Service Status"
+        remark
+            The following table describes status combinations: ::
+
+                SeSTAT  SySTAT  SSTAT
+                3       3       1
+
+            The value of 3 'Undefined' is assumed to represent that the status
+            cannot be determined.
+
+uap
+    020
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation literal table dedent to parenthetical note
+==================
+
+asterix 240 "Radar Video Transmission"
+edition 1.3
+date 2024-04-17
+
+items
+
+    000 "Message Type"
+        remark
+            The following table lists item presence: ::
+
+                Item            Video Summary
+                I240/040        O(1)
+
+            (1) - Either Item I240/040 or I240/041 shall be present in each Video Message
+            (2) - Either Item I240/050 or I240/051 shall be present in each video
+                  message
+
+uap
+    000
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation table placeholder and note sections
+==================
+
+asterix 021 "ADS-B Target Reports"
+edition 2.7
+date 2025-07-02
+
+items
+
+    170 "Target Identification"
+        remark
+            Intro:
+                - Version X refers to the MOPS version as defined in data item
+                  I021/210/VN, bits 6/4.
+
+            NOTES to Bits 8/4 (Position Integrity Category and Source):
+
+                - PIC then set according to the following table: ::
+
+            (see complex table in the original PDF file)
+
+            NOTE 1: Because NIC Supplements are received in different messages
+            they can be invalid.
+
+            NOTES to Bits 6/4 (VAL_STATE):
+                - The logic to populate VAL_STATE is implementation dependent.
+                  The ICD shall describe it.
+
+uap
+    170
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Category with common item structures
+==================
+
+asterix 247 "Version Number Exchange"
+edition 1.2
+date 2008-02-01
+preamble
+    Surveillance data exchange.
+
+items
+
+    010 "Data Source Identifier"
+        definition
+            Identification of the radar station from which the data are received.
+        group
+            SAC "System Area Code"
+                element 8
+                    raw
+            SIC "System Identification Code"
+                element 8
+                    raw
+        remark
+            Note:
+                The defined SACs are on the EUROCONTROL ASTERIX website
+
+    140 "Time of Day"
+        definition
+            Absolute time stamping expressed as UTC.
+        element 24
+            unsigned quantity 1/2^7 "s"
+
+    550 "Category Version Number Report"
+        definition
+            Version number of Categories used.
+        repetitive 1
+            group
+                CAT "Category"
+                    element 8
+                        unsigned integer
+
+    RE "Reserved Expansion Field"
+        definition
+            Expansion
+        explicit re
+
+uap
+    010
+    140
+    550
+    -
+    RE
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (preamble
+      (text))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (group
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_raw)))
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_raw))))
+        (remark_block
+          (text)
+          (text)))
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (element
+          (bit_size)
+          (content_quantity
+            (signedness)
+            (number)
+            (unit))))
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (repetitive
+          (byte_size)
+          (group
+            (item
+              (item_name)
+              (string)
+              (element
+                (bit_size)
+                (content_integer
+                  (signedness)))))))
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (explicit
+          (explicit_type))))
+    (uap_block
+      (uap_item
+        (item_name))
+      (uap_item
+        (item_name))
+      (uap_item
+        (item_name))
+      (uap_spare)
+      (uap_item
+        (item_name)))))
+
+==================
+Dependent variation case
+==================
+
+asterix 004 "Safety Nets Messages"
+edition 1.12
+date 2012-07-01
+
+items
+
+    120 "Conflict Characteristics"
+        group
+            CC "Conflict Classification"
+                group
+                    TID "Identification of Conflict Categories Definition Table"
+                        element 4
+                            raw
+                    CPC "Conflict Properties Class"
+                        case (000, 120/CC/TID)
+                            (5, 1):
+                                element 3
+                                    table
+                                        0: APW Low Severity
+                                        1: APW Medium Severity
+                            default:
+                                group
+                                    RAS "RIMCAS Alert Stage"
+                                        element 1
+                                            raw
+                                    spare 2
+
+uap
+    120
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (group
+          (item
+            (item_name)
+            (string)
+            (group
+              (item
+                (item_name)
+                (string)
+                (element
+                  (bit_size)
+                  (content_raw)))
+              (item
+                (item_name)
+                (string)
+                (dependent_variation
+                  (item_path_tuple
+                    (item_path
+                      (item_name))
+                    (item_path
+                      (item_name)
+                      (item_name)
+                      (item_name)))
+                  (variation_case
+                    (case_key_tuple
+                      (case_key)
+                      (case_key))
+                    (element
+                      (bit_size)
+                      (content_table
+                        (table_row
+                          (table_key)
+                          (text))
+                        (table_row
+                          (table_key)
+                          (text)))))
+                  (variation_case
+                    (default_case)
+                    (group
+                      (item
+                        (item_name)
+                        (string)
+                        (element
+                          (bit_size)
+                          (content_raw)))
+                      (spare
+                        (bit_size)))))))))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Dependent element content case
+==================
+
+asterix 021 "ADS-B Target Reports"
+edition 0.23
+date 2003-11-01
+
+items
+
+    150 "Air Speed"
+        group
+            IM ""
+                element 1
+                    table
+                        0: Air Speed = IAS
+                        1: Air Speed = Mach
+            AS "Air Speed (IAS or Mach)"
+                element 15
+                    case 150/IM
+                        0:
+                            unsigned quantity 1/2^14 "NM/s"
+                        1:
+                            unsigned quantity 1/1000 "Mach"
+                        default:
+                            raw
+
+uap
+    150
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (group
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_table
+                (table_row
+                  (table_key)
+                  (text))
+                (table_row
+                  (table_key)
+                  (text)))))
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_dependent
+                (item_path
+                  (item_name)
+                  (item_name))
+                (content_case
+                  (case_key)
+                  (content_quantity
+                    (signedness)
+                    (number)
+                    (unit)))
+                (content_case
+                  (case_key)
+                  (content_quantity
+                    (signedness)
+                    (number)
+                    (unit)))
+                (content_case
+                  (default_case)
+                  (content_raw))))))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Compound item with slots
+==================
+
+asterix 004 "Safety Nets Messages"
+edition 1.12
+date 2012-07-01
+
+items
+
+    070 "Conflict Timing and Separation"
+        definition
+            Information on Timing and Aircraft Separation
+        compound
+            TC "Time to Conflict"
+                description
+                    Time remaining to actual conflict situation
+                element 24
+                    unsigned quantity 1/2^7 "s"
+            -
+            CHS "Current Horizontal Separation"
+                element 24
+                    unsigned quantity 1/2 "m"
+
+uap
+    070
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (compound
+          (item
+            (item_name)
+            (string)
+            (description_block
+              (text))
+            (element
+              (bit_size)
+              (content_quantity
+                (signedness)
+                (number)
+                (unit))))
+          (compound_spare)
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_quantity
+                (signedness)
+                (number)
+                (unit)))))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+UAPS variations with selector
+==================
+
+asterix 001 "Transmission of Monoradar Data Target Reports"
+edition 1.2
+date 2011-08-01
+
+items
+
+    020 "Target Report Descriptor"
+        element 1
+            table
+                0: Plot
+                1: Track
+
+    SP "Special Purpose Field"
+        explicit sp
+
+uaps
+    variations
+        plot
+            020
+            -
+            SP
+            rfs
+        track
+            020
+            SP
+            rfs
+    case 020/TYP
+        0: plot
+        1: track
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (element
+          (bit_size)
+          (content_table
+            (table_row
+              (table_key)
+              (text))
+            (table_row
+              (table_key)
+              (text)))))
+      (item
+        (item_name)
+        (string)
+        (explicit
+          (explicit_type))))
+    (uaps_block
+      (uap_variations_block
+        (uap_variation
+          (uap_name)
+          (uap_item
+            (item_name))
+          (uap_spare)
+          (uap_item
+            (item_name))
+          (uap_rfs))
+        (uap_variation
+          (uap_name)
+          (uap_item
+            (item_name))
+          (uap_item
+            (item_name))
+          (uap_rfs)))
+      (uap_case_block
+        (item_path
+          (item_name)
+          (item_name))
+        (uap_case_row
+          (case_key)
+          (uap_name))
+        (uap_case_row
+          (case_key)
+          (uap_name))))))
+
+==================
+Extended item with extension slots
+==================
+
+asterix 001 "Transmission of Monoradar Data Target Reports"
+edition 1.2
+date 2011-08-01
+
+items
+
+    020 "Target Report Descriptor"
+        definition
+            Type and characteristics of the radar data.
+        extended
+            TYP ""
+                element 1
+                    table
+                        0: Plot
+                        1: Track
+            SIM ""
+                element 1
+                    table
+                        0: Actual plot or track
+                        1: Simulated plot or track
+            -
+            spare 2
+            -
+
+uap
+    020
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (extended
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_table
+                (table_row
+                  (table_key)
+                  (text))
+                (table_row
+                  (table_key)
+                  (text)))))
+          (item
+            (item_name)
+            (string)
+            (element
+              (bit_size)
+              (content_table
+                (table_row
+                  (table_key)
+                  (text))
+                (table_row
+                  (table_key)
+                  (text)))))
+          (extension_spare)
+          (spare
+            (bit_size))
+          (extension_spare))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation numbered continuation lines
+==================
+
+asterix 247 "Version Number Exchange"
+edition 1.3
+date 2021-08-31
+
+items
+
+    550 "Category Version Number Report"
+        definition
+            Version number of Categories used.
+        element 8
+            unsigned integer
+        remark
+            Notes:
+
+                1. The Version Number corresponds to the Edition of the ASTERIX
+                   Category specification
+                2. The version number(s) corresponding to the Edition of the ASTERIX
+                   Category Reserved Expansion Field(s) can be specified in the REF.
+                3. The version number(s) corresponding to the Edition of the ASTERIX
+                   Category Special Purpose Field(s) may be specified in the SPF.
+
+uap
+    550
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (definition_block
+          (text))
+        (element
+          (bit_size)
+          (content_integer
+            (signedness)))
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation bullet continuation lines
+==================
+
+asterix 004 "Safety Nets Messages"
+edition 1.13
+date 2020-04-30
+
+items
+
+    020 "Time of Message"
+        element 24
+            unsigned quantity 1/2^7 "s"
+        remark
+            Notes:
+                - This time is given at an application level
+                  and not at the communication level.
+
+                - The time is reset to zero at every midnight.
+
+uap
+    020
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (element
+          (bit_size)
+          (content_quantity
+            (signedness)
+            (number)
+            (unit)))
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation nested bullet dedent to numbered line
+==================
+
+asterix 007 "Transmission of Directed Interrogation Messages"
+edition 1.12
+date 2024-07-01
+
+items
+
+    020 "Target Report Descriptor"
+        remark
+            Notes:
+
+                1. A numbered note introduces nested bullets:
+                   continuation before the nested bullet list.
+
+                       - First nested bullet
+                       - Second nested bullet
+
+                2. The next numbered note resumes after the nested bullet list.
+                   continuation after resuming.
+
+uap
+    020
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation nested bullet dedent to label line
+==================
+
+asterix 007 "Transmission of Directed Interrogation Messages"
+edition 1.12
+date 2024-07-01
+
+items
+
+    050 "Mode-2 Code in Octal Representation"
+        remark
+            Note:
+                - Bit 15 has no meaning in this case
+                  and is set to zero.
+            Note:
+                - Another note continues in the same remark block.
+
+uap
+    050
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation literal table block after marker
+==================
+
+asterix 010 "Transmission of Monosensor Surface Movement Data"
+edition 1.1
+date 2007-03-01
+
+items
+
+    000 "Message Type"
+        remark
+            Notes:
+
+                1. The list of items present for the message types is defined in
+                   the following table.
+
+            The list of items present for the four message types is defined in the following
+            table. M stands for mandatory, O for optional, X for never present. ::
+
+                Item Type [001, 002]
+                          [Target Report, Status Message]
+
+                I010/000 Message Type M M
+                I010/010 Data Source Identifier M M
+
+uap
+    000
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (doc_literal_row
+            (doc_literal_row_text))
+          (doc_literal_row
+            (doc_literal_row_text)))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Documentation repeated NOTE regarding labels
+==================
+
+asterix 016 "Independent Non-Cooperative Surveillance System Configuration Reports"
+edition 1.0
+date 2019-07-15
+
+items
+
+    410 "Transmitter Properties"
+        remark
+            NOTE - Regarding Transmitter Identification:
+                a. Individual channels of a transmitter are considered as
+                separate collocated transmitters.
+
+                b. A Transmitter ID may be assigned to individual channels
+                of a compound transmitter.
+
+            NOTE - Regarding Transmission Time Offset
+                a. Time offset of transmitter compared to the reference
+                transmitter within the single frequency network.
+
+uap
+    410
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (remark_block
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text)
+          (text))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Preamble star bullet list
+==================
+
+asterix 000 "Imaginary category for test purposes"
+edition 1.0
+date 2000-12-13
+preamble
+    Table example ::
+
+        ADS-B Version 3 (PS3)           ADS-Version < 3 (I021/200 - PS)
+        ---------------------------------------------------------------
+        0 (No Emergency/not reported)   0 (No Emergency/not reported)
+        1 (General emergency)           1 (General emergency)
+        2 (UAS/RPAS Lost Link)          4 (No communication)
+        ...
+
+    Item list
+
+        * item1
+        * item2
+
+items
+
+    000 "Message Type"
+        element 8
+            raw
+
+uap
+    000
+
+---
+
+(source_file
+  (basic_category
+    (category_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (preamble
+      (text)
+      (doc_literal_row
+        (doc_literal_row_text))
+      (text)
+      (doc_literal_row
+        (doc_literal_row_text))
+      (doc_literal_row
+        (doc_literal_row_text))
+      (doc_literal_row
+        (doc_literal_row_text))
+      (text)
+      (text)
+      (text)
+      (text))
+    (items_block
+      (item
+        (item_name)
+        (string)
+        (element
+          (bit_size)
+          (content_raw))))
+    (uap_block
+      (uap_item
+        (item_name)))))
+
+==================
+Reference compound fx root
+==================
+
+ref 000 "Imaginary expansion for test purposes"
+edition 1.2
+date 2000-12-13
+
+compound fx
+    I1 ""
+        element 8
+            raw
+
+---
+
+(source_file
+  (ref_spec
+    (ref_header
+      (category_number)
+      (string))
+    (edition
+      (version))
+    (date
+      (date_literal))
+    (compound
+      (item
+        (item_name)
+        (string)
+        (element
+          (bit_size)
+          (content_raw))))))

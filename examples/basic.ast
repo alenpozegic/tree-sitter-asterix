@@ -1,0 +1,12 @@
+asterix 021 "ADS-B Target Reports"
+edition 2.7
+date 2025-07-02
+
+items
+
+    010 "Data Source Identification"
+        element 8
+            raw
+
+uap
+    010
