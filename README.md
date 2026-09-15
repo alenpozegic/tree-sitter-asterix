@@ -39,4 +39,16 @@ npm run build:neovim:bundle
 
 The bundle and its checksum are created in `dist/`.
 
+## Modify the grammar
+
+Edit `grammar.js`, add or update a matching case in `test/corpus/`, then run:
+
+```bash
+npm ci
+npm run generate
+npm test
+```
+
+Commit the grammar, corpus test and regenerated files in `src/` together.
+
 BSD-3-Clause licensed. See [LICENSE](LICENSE).
