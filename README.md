@@ -3,6 +3,9 @@
 Tree-sitter grammar for ASTERIX `.ast` specification files, with syntax
 highlighting, folds and indentation for Neovim.
 
+This grammar supports `.ast` files from the
+[asterix-specs project](https://github.com/zoranbosnjak/asterix-specs).
+
 Neovim uses the `asterix-spec` filetype and Markdown fenced-code label. The
 internal Tree-sitter parser identifier is `asterix_spec`.
 
