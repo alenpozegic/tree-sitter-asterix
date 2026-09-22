@@ -1,6 +1,6 @@
 local M = {}
 
-M.indentexpr = "v:lua.GetAsterixIndent()"
+M.indentexpr = "v:lua.GetAsterixSpecIndent()"
 M.indentkeys = "!^F,o,O,<:>,0=case,0=default,0=definition,0=description,0=remark,0=group,0=extended,0=compound,0=element,0=table,0=uap,0=uaps,0=variations"
 
 local applying = false
@@ -8,7 +8,7 @@ local applying = false
 local function is_loaded_asterix_buffer(bufnr)
   return bufnr
     and vim.api.nvim_buf_is_loaded(bufnr)
-    and vim.bo[bufnr].filetype == "asterix"
+    and vim.bo[bufnr].filetype == "asterix-spec"
 end
 
 function M.apply_indent(bufnr)
@@ -18,7 +18,7 @@ function M.apply_indent(bufnr)
     return
   end
 
-  pcall(require, "asterix_indent")
+  pcall(require, "asterix_spec_indent")
 
   applying = true
   vim.bo[bufnr].indentexpr = M.indentexpr

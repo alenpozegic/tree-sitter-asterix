@@ -353,21 +353,21 @@ static bool scan_layout(Scanner *scanner, TSLexer *lexer,
   return false;
 }
 
-void *tree_sitter_asterix_external_scanner_create(void) {
+void *tree_sitter_asterix_spec_external_scanner_create(void) {
   Scanner *scanner = calloc(1, sizeof(Scanner));
   reset_scanner(scanner);
   return scanner;
 }
 
-void tree_sitter_asterix_external_scanner_destroy(void *payload) {
+void tree_sitter_asterix_spec_external_scanner_destroy(void *payload) {
   free(payload);
 }
 
-void tree_sitter_asterix_external_scanner_reset(void *payload) {
+void tree_sitter_asterix_spec_external_scanner_reset(void *payload) {
   reset_scanner((Scanner *)payload);
 }
 
-unsigned tree_sitter_asterix_external_scanner_serialize(void *payload,
+unsigned tree_sitter_asterix_spec_external_scanner_serialize(void *payload,
                                                         char *buffer) {
   Scanner *scanner = (Scanner *)payload;
   const unsigned required_size =
@@ -394,7 +394,7 @@ unsigned tree_sitter_asterix_external_scanner_serialize(void *payload,
   return size;
 }
 
-void tree_sitter_asterix_external_scanner_deserialize(void *payload,
+void tree_sitter_asterix_spec_external_scanner_deserialize(void *payload,
                                                       const char *buffer,
                                                       unsigned length) {
   Scanner *scanner = (Scanner *)payload;
@@ -474,7 +474,7 @@ void tree_sitter_asterix_external_scanner_deserialize(void *payload,
   commit_scanner(scanner, &restored);
 }
 
-bool tree_sitter_asterix_external_scanner_scan(void *payload, TSLexer *lexer,
+bool tree_sitter_asterix_spec_external_scanner_scan(void *payload, TSLexer *lexer,
                                                const bool *valid_symbols) {
   Scanner *scanner = (Scanner *)payload;
 

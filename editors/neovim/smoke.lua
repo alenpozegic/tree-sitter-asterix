@@ -7,18 +7,18 @@ end
 
 vim.cmd("filetype detect")
 
-if vim.bo.filetype ~= "asterix" then
-  fail("expected filetype=asterix, got " .. vim.inspect(vim.bo.filetype) .. " for " .. file)
+if vim.bo.filetype ~= "asterix-spec" then
+  fail("expected filetype=asterix-spec, got " .. vim.inspect(vim.bo.filetype) .. " for " .. file)
 end
 
-local ok_start, start_error = pcall(vim.treesitter.start, 0, "asterix")
+local ok_start, start_error = pcall(vim.treesitter.start, 0, "asterix_spec")
 if not ok_start then
   fail("vim.treesitter.start failed: " .. tostring(start_error))
 end
 
-local ok_parser, parser = pcall(vim.treesitter.get_parser, 0, "asterix")
+local ok_parser, parser = pcall(vim.treesitter.get_parser, 0, "asterix_spec")
 if not ok_parser or not parser then
-  fail("could not get asterix parser: " .. tostring(parser))
+  fail("could not get asterix_spec parser: " .. tostring(parser))
 end
 
 local ok_parse, trees = pcall(parser.parse, parser)
@@ -35,13 +35,13 @@ if root:has_error() then
   fail("syntax tree contains ERROR or MISSING nodes")
 end
 
-local query = vim.treesitter.query.get("asterix", "highlights")
+local query = vim.treesitter.query.get("asterix_spec", "highlights")
 if not query then
-  fail("missing highlights query for asterix")
+  fail("missing highlights query for asterix_spec")
 end
 
 local function count_captures(query_name)
-  local loaded_query = vim.treesitter.query.get("asterix", query_name)
+  local loaded_query = vim.treesitter.query.get("asterix_spec", query_name)
   if not loaded_query then
     fail("missing " .. query_name .. " query for asterix")
   end
@@ -103,7 +103,7 @@ if not indent_counts.indent and not indent_counts["indent.begin"] then
   fail("missing required indents capture @indent or @indent.begin")
 end
 
-if vim.bo.indentexpr ~= "v:lua.GetAsterixIndent()" then
+if vim.bo.indentexpr ~= "v:lua.GetAsterixSpecIndent()" then
   fail("expected ASTERIX indentexpr, got " .. vim.inspect(vim.bo.indentexpr))
 end
 

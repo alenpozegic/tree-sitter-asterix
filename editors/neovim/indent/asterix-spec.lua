@@ -200,7 +200,7 @@ function M.get_indent(lnum)
   return base
 end
 
-function _G.GetAsterixIndent()
+function _G.GetAsterixSpecIndent()
   return M.get_indent(vim.v.lnum)
 end
 

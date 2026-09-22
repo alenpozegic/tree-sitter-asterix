@@ -1,10 +1,10 @@
 {
   "grammars": [
     {
-      "name": "asterix",
-      "camelcase": "Asterix",
+      "name": "asterix_spec",
+      "camelcase": "AsterixSpec",
       "title": "ASTERIX",
-      "scope": "source.asterix",
+      "scope": "source.asterix-spec",
       "path": ".",
       "file-types": [
         "ast"
@@ -12,11 +12,11 @@
       "highlights": "queries/highlights.scm",
       "locals": "queries/locals.scm",
       "tags": "queries/tags.scm",
-      "injection-regex": "^asterix$"
+      "injection-regex": "^asterix-spec$"
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "BSD-3-Clause",
     "description": "Tree-sitter grammar for ASTERIX .ast specification files."
   }

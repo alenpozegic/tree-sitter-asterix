@@ -3,6 +3,9 @@
 Tree-sitter grammar for ASTERIX `.ast` specification files, with syntax
 highlighting, folds and indentation for Neovim.
 
+Neovim uses the `asterix-spec` filetype and Markdown fenced-code label. The
+internal Tree-sitter parser identifier is `asterix_spec`.
+
 ## Requirements
 
 The prebuilt bundle requires Linux x86_64 with glibc, Bash, `tar`,
@@ -18,12 +21,15 @@ Download the `.tar.gz` archive and matching `.sha256` file from
 run:
 
 ```bash
-sha256sum -c tree-sitter-asterix-neovim-linux-x86_64-v0.1.0.tar.gz.sha256
-tar -xzf tree-sitter-asterix-neovim-linux-x86_64-v0.1.0.tar.gz
-cd tree-sitter-asterix-neovim-linux-x86_64-v0.1.0
+sha256sum -c tree-sitter-asterix-neovim-linux-x86_64-v0.2.0.tar.gz.sha256
+tar -xzf tree-sitter-asterix-neovim-linux-x86_64-v0.2.0.tar.gz
+cd tree-sitter-asterix-neovim-linux-x86_64-v0.2.0
 ./install.sh
 ./smoke.sh
 ```
+
+The installer safely upgrades an unmodified runtime installed from `v0.1.0`.
+It refuses to replace modified, foreign or ambiguously owned files.
 
 Run `./uninstall.sh` from the same directory to remove the installed runtime.
 

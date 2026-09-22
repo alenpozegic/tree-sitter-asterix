@@ -1,4 +1,4 @@
-local runtime = require("asterix_runtime")
+local runtime = require("asterix_spec_runtime")
 
 local function fail(message)
   io.stderr:write("NVIM_GUARD_SMOKE_FAIL: " .. message .. "\n")
@@ -8,8 +8,8 @@ end
 vim.cmd("filetype plugin indent on")
 vim.cmd("filetype detect")
 
-if vim.bo.filetype ~= "asterix" then
-  fail("expected filetype=asterix, got " .. vim.inspect(vim.bo.filetype))
+if vim.bo.filetype ~= "asterix-spec" then
+  fail("expected filetype=asterix-spec, got " .. vim.inspect(vim.bo.filetype))
 end
 
 if vim.bo.indentexpr ~= runtime.indentexpr then

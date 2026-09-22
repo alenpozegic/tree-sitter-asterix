@@ -13,7 +13,7 @@ const documentationBlock = ($, keyword) => seq(
 );
 
 module.exports = grammar({
-  name: "asterix",
+  name: "asterix_spec",
 
   externals: $ => [
     $._indent,

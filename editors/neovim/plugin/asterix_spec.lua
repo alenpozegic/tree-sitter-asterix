@@ -1,7 +1,9 @@
-local group = vim.api.nvim_create_augroup("tree_sitter_asterix_runtime_guard", { clear = true })
+pcall(vim.treesitter.language.register, "asterix_spec", "asterix-spec")
+
+local group = vim.api.nvim_create_augroup("tree_sitter_asterix_spec_runtime_guard", { clear = true })
 
 local function with_runtime(callback, bufnr)
-  local ok, runtime = pcall(require, "asterix_runtime")
+  local ok, runtime = pcall(require, "asterix_spec_runtime")
   if ok then
     callback(runtime, bufnr)
   end

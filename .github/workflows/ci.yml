@@ -51,7 +51,7 @@ jobs:
       - name: Build and test bundle
         run: |
           npm run build:neovim:bundle
-          bundle="dist/tree-sitter-asterix-neovim-linux-x86_64-v0.1.0"
+          bundle="dist/tree-sitter-asterix-neovim-linux-x86_64-v0.2.0"
           (cd dist && sha256sum --check "$(basename "$bundle").tar.gz.sha256")
           export HOME="$RUNNER_TEMP/home"
           export XDG_CONFIG_HOME="$HOME/.config"
@@ -60,4 +60,24 @@ jobs:
           export XDG_CACHE_HOME="$HOME/.cache"
           "$bundle/install.sh"
           "$bundle/smoke.sh"
+          cat > "$RUNNER_TEMP/injection.md" <<'MARKDOWN'
+          ```asterix-spec
+          asterix 000 "Markdown"
+          edition 1.0
+          date 2000-01-01
+
+          items
+              001 "Raw"
+          ```
+
+          ```asterix
+          asterix 000 "Legacy label"
+          ```
+
+          ```lua
+          local control = true
+          ```
+          MARKDOWN
+          nvim --headless "$RUNNER_TEMP/injection.md" \
+            +"luafile $bundle/smoke/markdown-injection-smoke.lua"
           "$bundle/uninstall.sh"

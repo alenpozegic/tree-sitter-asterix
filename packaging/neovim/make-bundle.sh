@@ -83,12 +83,13 @@ rm -rf "$build_dir" "$staging_dir" "$archive_path" "$checksum_path"
 mkdir -p \
   "$generated_dir" \
   "$staging_dir/runtime/parser" \
-  "$staging_dir/runtime/queries/asterix" \
+  "$staging_dir/runtime/queries/asterix_spec" \
   "$staging_dir/runtime/ftdetect" \
   "$staging_dir/runtime/ftplugin" \
   "$staging_dir/runtime/indent" \
   "$staging_dir/runtime/after/ftplugin" \
   "$staging_dir/runtime/after/indent" \
+  "$staging_dir/runtime/after/queries/markdown" \
   "$staging_dir/runtime/lua" \
   "$staging_dir/runtime/plugin" \
   "$staging_dir/samples" \
@@ -98,9 +99,9 @@ mkdir -p \
 
 "$bundle_cc" -fPIC -I"$generated_dir" -I"$grammar_dir/src" -c "$generated_dir/parser.c" -o "$build_dir/parser.o"
 "$bundle_cc" -fPIC -I"$generated_dir" -I"$grammar_dir/src" -c "$grammar_dir/src/scanner.c" -o "$build_dir/scanner.o"
-"$bundle_cc" -shared "$build_dir/parser.o" "$build_dir/scanner.o" -o "$staging_dir/runtime/parser/asterix.so"
+"$bundle_cc" -shared "$build_dir/parser.o" "$build_dir/scanner.o" -o "$staging_dir/runtime/parser/asterix_spec.so"
 
-parser_dynamic_section="$(readelf -d "$staging_dir/runtime/parser/asterix.so")"
+parser_dynamic_section="$(readelf -d "$staging_dir/runtime/parser/asterix_spec.so")"
 if grep -Eq '\((RPATH|RUNPATH)\)' <<< "$parser_dynamic_section"; then
   fail "parser contains an embedded RPATH or RUNPATH; select a portable compiler with ASTERIX_CC"
 fi
@@ -110,7 +111,7 @@ while IFS= read -r needed_library; do
 done < <(sed -n 's/.*Shared library: \[\([^]]*\)\].*/\1/p' <<< "$parser_dynamic_section")
 
 mapfile -t parser_glibc_symbols < <(
-  readelf --version-info "$staging_dir/runtime/parser/asterix.so" \
+  readelf --version-info "$staging_dir/runtime/parser/asterix_spec.so" \
     | grep -oE 'GLIBC_[0-9]+(\.[0-9]+)*' \
     | LC_ALL=C sort -Vu
 )
@@ -123,17 +124,17 @@ else
 fi
 
 for query in highlights folds indents locals tags; do
-  cp "$grammar_dir/queries/$query.scm" "$staging_dir/runtime/queries/asterix/$query.scm"
+  cp "$grammar_dir/queries/$query.scm" "$staging_dir/runtime/queries/asterix_spec/$query.scm"
 done
 
-cat > "$staging_dir/runtime/ftdetect/asterix.vim" <<'EOF'
-augroup tree_sitter_asterix_filetype
+cat > "$staging_dir/runtime/ftdetect/asterix-spec.vim" <<'EOF'
+augroup tree_sitter_asterix_spec_filetype
   autocmd!
-  autocmd BufRead,BufNewFile *.ast setfiletype asterix
+  autocmd BufRead,BufNewFile *.ast setfiletype asterix-spec
 augroup END
 EOF
 
-cat > "$staging_dir/runtime/ftplugin/asterix.lua" <<'EOF'
+cat > "$staging_dir/runtime/ftplugin/asterix-spec.lua" <<'EOF'
 vim.bo.commentstring = "// %s"
 vim.bo.comments = "://"
 vim.bo.shiftwidth = 4
@@ -141,7 +142,8 @@ vim.bo.softtabstop = 4
 vim.bo.tabstop = 4
 vim.bo.expandtab = true
 
-pcall(vim.treesitter.start, 0, "asterix")
+pcall(vim.treesitter.language.register, "asterix_spec", "asterix-spec")
+pcall(vim.treesitter.start, 0, "asterix_spec")
 
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -149,14 +151,15 @@ vim.wo.foldlevel = 99
 vim.o.foldlevelstart = 99
 EOF
 
-cp "$editor_dir/indent/asterix.lua" "$staging_dir/runtime/lua/asterix_indent.lua"
-cp "$editor_dir/lua/asterix_runtime.lua" "$staging_dir/runtime/lua/asterix_runtime.lua"
-cp "$editor_dir/plugin/asterix.lua" "$staging_dir/runtime/plugin/asterix.lua"
-cp "$editor_dir/after/ftplugin/asterix.lua" "$staging_dir/runtime/after/ftplugin/asterix.lua"
-cp "$editor_dir/after/indent/asterix.lua" "$staging_dir/runtime/after/indent/asterix.lua"
+cp "$editor_dir/indent/asterix-spec.lua" "$staging_dir/runtime/lua/asterix_spec_indent.lua"
+cp "$editor_dir/lua/asterix_spec_runtime.lua" "$staging_dir/runtime/lua/asterix_spec_runtime.lua"
+cp "$editor_dir/plugin/asterix_spec.lua" "$staging_dir/runtime/plugin/asterix_spec.lua"
+cp "$editor_dir/after/ftplugin/asterix-spec.lua" "$staging_dir/runtime/after/ftplugin/asterix-spec.lua"
+cp "$editor_dir/after/indent/asterix-spec.lua" "$staging_dir/runtime/after/indent/asterix-spec.lua"
+cp "$editor_dir/after/queries/markdown/injections.scm" "$staging_dir/runtime/after/queries/markdown/injections.scm"
 
-cat > "$staging_dir/runtime/indent/asterix.lua" <<'EOF'
-require("asterix_runtime").apply_indent(0)
+cat > "$staging_dir/runtime/indent/asterix-spec.lua" <<'EOF'
+require("asterix_spec_runtime").apply_indent(0)
 EOF
 
 (
@@ -168,6 +171,7 @@ EOF
 
 cp "$editor_dir/smoke.lua" "$staging_dir/smoke/smoke.lua"
 cp "$editor_dir/guard-smoke.lua" "$staging_dir/smoke/guard-smoke.lua"
+cp "$script_dir/markdown-injection-smoke.lua" "$staging_dir/smoke/markdown-injection-smoke.lua"
 cp "$repo_root/examples/basic.ast" "$staging_dir/samples/basic.ast"
 cp "$repo_root/LICENSE" "$staging_dir/LICENSE"
 cp "$repo_root/THIRD_PARTY_NOTICES.md" "$staging_dir/THIRD_PARTY_NOTICES.md"
